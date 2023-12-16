@@ -4,17 +4,22 @@ if ("serviceWorker" in navigator) {
 }
 //
 function rrr() {
-        // Clear the cache
-        if ('caches' in window) {
-            caches.keys().then(function(cacheNames) {
-                cacheNames.forEach(function(cacheName) {
-                    caches.delete(cacheName);
+        // Check if online
+        if (navigator.onLine) {
+            // Clear the cache
+            if ('caches' in window) {
+                caches.keys().then(function(cacheNames) {
+                    cacheNames.forEach(function(cacheName) {
+                        caches.delete(cacheName);
+                    });
                 });
-            });
-        }
+            }
 
-        // Reload the page
-        location.reload();
+            // Reload the page
+            location.reload();
+        } else {
+            alert("يرجى التحقق من اتصالك بالإنترنت.");
+        }
     }
 //
 var itemList = document.getElementById("notes");

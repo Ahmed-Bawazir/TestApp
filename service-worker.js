@@ -76,7 +76,7 @@ self.addEventListener("fetch", (event) => {
     cacheFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
-      fallbackUrl: "/gallery/myLittleVader.jpg",
+      fallbackUrl: "/contract.png",
     }),
   );
 });

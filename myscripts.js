@@ -2,7 +2,21 @@ if ("serviceWorker" in navigator) {
   // register service worker
   navigator.serviceWorker.register("service-worker.js");
 }
+//
+function rrr() {
+        // Clear the cache
+        if ('caches' in window) {
+            caches.keys().then(function(cacheNames) {
+                cacheNames.forEach(function(cacheName) {
+                    caches.delete(cacheName);
+                });
+            });
+        }
 
+        // Reload the page
+        location.reload();
+    }
+//
 var itemList = document.getElementById("notes");
 
 itemList.addEventListener("click", removeItem);

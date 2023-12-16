@@ -47,7 +47,18 @@
     <ul id="notes"></ul>
     <script src="myscripts.js">
 function rrr() {
+        // Clear the cache
+        if ('caches' in window) {
+            caches.keys().then(function(cacheNames) {
+                cacheNames.forEach(function(cacheName) {
+                    caches.delete(cacheName);
+                });
+            });
+        }
+
+        // Reload the page
         location.reload();
-    }</script>
+    }
+    </script>
   </body>
 </html>

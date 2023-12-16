@@ -60,12 +60,11 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     addResourcesToCache([
-      "/",
-      "/index.html",
-      "/style.css",
-      "/myscripts.js",
-      "/contract.png",
-      "/manifest.json",
+      "index.html",
+      "style.css",
+      "myscripts.js",
+      "contract.png",
+      "manifest.json",
       
     ]),
   );
@@ -76,7 +75,7 @@ self.addEventListener("fetch", (event) => {
     cacheFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
-      fallbackUrl: "/contract.png",
+      fallbackUrl: "contract.png",
     }),
   );
 });

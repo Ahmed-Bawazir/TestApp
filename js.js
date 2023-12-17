@@ -13,6 +13,8 @@ function updateNow() {
           caches.delete(cacheName);
         });
       });
+      navigator.serviceWorker.register("service-worker.js");
+
     }
 
     // Reload the page

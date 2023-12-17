@@ -2,8 +2,27 @@ if ("serviceWorker" in navigator) {
   // register service worker
   navigator.serviceWorker.register("service-worker.js");
 }
- //
- let pro = new Promise((resolve, reject) => {
+//
+function updateNow() {
+  // Check if online
+  if (navigator.onLine) {
+    // Clear the cache
+    if ("caches" in window) {
+      caches.keys().then(function (cacheNames) {
+        cacheNames.forEach(function (cacheName) {
+          caches.delete(cacheName);
+        });
+      });
+    }
+
+    // Reload the page
+    location.reload();
+  } else {
+    alert("يرجى التحقق من اتصالك بالإنترنت.");
+  }
+}
+//
+let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
   api.open("GET", "date.json");
   api.send();
@@ -134,7 +153,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات 2| مسجد الرحمة
+    <h2>مواقيت الصلوات tt| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    
@@ -151,7 +170,9 @@ pro.then((e) => {
  </tbody>
 </table>
 <br/>
- <span class="update">أخر تحديث ${e.update}  </span>
+ <span class="update">أخر تحديث ${e.update}  
+  <button onclick="updateNow()">تحديث</button>
+ </span>
 <div class="footer">
  ${textfooter}
  

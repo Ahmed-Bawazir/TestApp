@@ -68,6 +68,16 @@ th {
   position: relative;
   top:-25px
 }
+.update button{
+  background-color: #eee;
+  padding: 2px 5px;
+  border-radius: 5px;
+  border: 2px solid aqua;
+  margin-right: 10px;
+}
+.update button:hover{
+  background-color: #aaa;
+}
 .contact {
   position: fixed;
   bottom: 5px;

@@ -41,7 +41,7 @@ var precacheConfig = [
   ["icon192.png", "57f44c7e84e8db553271cc408bbaad22"],
   ["index.html", "09cfa67d0f55dd2591b9f9ed72f747a0"],
   ["manifest.json", "350a5c214307ff3d11eee259369449b7"],
-  ["myscripts.js", "298e946e4029dce801f90d9c6ce3cc44"],
+  ["js.js", "298e946e4029dce801f90d9c6ce3cc44"],
   ["package.json", "c3e2229df6083112cb941dd02a8eb9e2"],
   ["style.css", "265a2c3891fe945c12ce436f7fb85b5e"],
 ];

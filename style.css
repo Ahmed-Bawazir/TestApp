@@ -68,17 +68,6 @@ th {
   position: relative;
   top:-25px
 }
-.update button{
-  color: black;
-  background-color: #ccc;
-  outline: none;
-  border: none;
-  padding: 5px;
-  margin-right: 5px;
-  border-radius: 5px;
-  border: 2px solid aqua;
- 
-}
 .contact {
   position: fixed;
   bottom: 5px;

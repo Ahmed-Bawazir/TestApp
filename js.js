@@ -2,28 +2,8 @@ if ("serviceWorker" in navigator) {
   // register service worker
   navigator.serviceWorker.register("service-worker.js");
 }
-//
-function rrr() {
-  // Check if online
-  if (navigator.onLine) {
-    // Clear the cache
-    if ("caches" in window) {
-      caches.keys().then(function (cacheNames) {
-        cacheNames.forEach(function (cacheName) {
-          caches.delete(cacheName);
-        });
-      });
-    }
-
-    // Reload the page
-    location.reload();
-  } else {
-    alert("يرجى التحقق من اتصالك بالإنترنت.");
-  }
-}
-
-//
-let pro = new Promise((resolve, reject) => {
+ //
+ let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
   api.open("GET", "date.json");
   api.send();
@@ -131,54 +111,53 @@ pro.then((e) => {
   let text = "";
   for (let index = 0; index < jsonData.length; index++) {
     text += `
-      <tr>
-         <th>${jsonData[index].name}</th>
-         <td>${
-           jsonData[index].a.split(":")[0] > 12
-             ? `${jsonData[index].a.split(":")[0] - 12}:${
-                 jsonData[index].a.split(":")[1]
-               }`
-             : `${jsonData[index].a}`
-         }</td>
-         <td>${
-           jsonData[index].b.split(":")[0] > 12
-             ? `${jsonData[index].b.split(":")[0] - 12}:${
-                 jsonData[index].b.split(":")[1]
-               }`
-             : `${jsonData[index].b}`
-         }</td>
-       </tr>`;
+  <tr>
+     <th>${jsonData[index].name}</th>
+     <td>${
+       jsonData[index].a.split(":")[0] > 12
+         ? `${jsonData[index].a.split(":")[0] - 12}:${
+             jsonData[index].a.split(":")[1]
+           }`
+         : `${jsonData[index].a}`
+     }</td>
+     <td>${
+       jsonData[index].b.split(":")[0] > 12
+         ? `${jsonData[index].b.split(":")[0] - 12}:${
+             jsonData[index].b.split(":")[1]
+           }`
+         : `${jsonData[index].b}`
+     }</td>
+   </tr>`;
   }
   //
   let content = document.createElement("div");
   content.className = "container";
   content.innerHTML = `
-     
-        <h2>مواقيت الصلوات | مسجد الرحمة
-          <br/>
-          <span>بمنطقة النقعة</span></h2>
-       
-   <table>
-     <thead>
-       <tr>
-         <th class="nn">الفرض / وقت ..</th>
-         <th class="nn">الأذان</th>
-         <th class="nn">الاقامة</th>
-       </tr>
-     </thead>
-     <tbody>
-     ${text}
-     </tbody>
-   </table>
-   <br/>
-     <span class="update">أخر تحديث ${e.update}  <button onclick="rrr()">تحديث</button>
-     </span>
-   <div class="footer">
-     ${textfooter}
-     
-   </div>
-  <div class="contact">  للتواصل  ||<a href="https://wa.me/967775998812">4HM3D</a></div>
-
+  <div class="container">
+    <h2>مواقيت الصلوات | مسجد الرحمة
+      <br/>
+      <span>بمنطقة النقعة</span></h2>
+   
+<table>
+ <thead>
+   <tr>
+     <th class="nn">الفرض / وقت ..</th>
+     <th class="nn">الأذان</th>
+     <th class="nn">الاقامة</th>
+   </tr>
+ </thead>
+ <tbody>
+ ${text}
+ </tbody>
+</table>
+<br/>
+ <span class="update">أخر تحديث ${e.update}  </span>
+<div class="footer">
+ ${textfooter}
+ 
+</div>
+<div class="contact">  للتواصل  ||<a href="https://wa.me/967775998812">4HM3D<a/></div>
+</div>
 `;
   document.body.appendChild(content);
 });

@@ -7,22 +7,20 @@ if ("serviceWorker" in navigator) {
   })
 }
 //
-function updateNow() {
+async function updateNow() {
   // Check if online
   if (navigator.onLine) {
-    // Clear the cache
-    if ("caches" in window) {
-      caches.keys().then(function (cacheNames) {
-        cacheNames.forEach(function (cacheName) {
-          caches.delete(cacheName);
-        });
-      });
-      navigator.serviceWorker.register("service-worker.js");
-
-    }
+    //update date.json file
+    const assets = [
+      "/date.json",
+    ]
+    await caches.open("date-pray-v1").then(cache => {
+      cache.addAll(assets)
+    })
 
     // Reload the page
     location.reload();
+
   } else {
     alert("يرجى التحقق من اتصالك بالإنترنت.");
   }
@@ -159,7 +157,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات jj | مسجد الرحمة
+    <h2>مواقيت الصلوات  | مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

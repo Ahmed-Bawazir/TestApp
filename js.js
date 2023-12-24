@@ -1,11 +1,8 @@
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function() {
-    navigator.serviceWorker
-      .register("/service-worker.js")
-      .then(res => console.log("service worker registered"))
-      .catch(err => console.log("service worker not registered", err))
-  })
+  // register service worker
+  navigator.serviceWorker.register("service-worker.js");
 }
+
 //
 /* async function updateNow() {
   // Check if online
@@ -157,7 +154,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  |test|| مسجد الرحمة
+    <h2>مواقيت الصلوات  |testing|| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

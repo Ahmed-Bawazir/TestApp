@@ -135,7 +135,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  |testing1|| مسجد الرحمة
+    <h2>مواقيت الصلوات  |testing111|| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    
@@ -153,6 +153,8 @@ pro.then((e) => {
 </table>
 <br/>
  <span class="update">أخر تحديث ${e.update}  
+ <button onclick="updateNow()">تحديث</button>
+
  </span>
 <div class="footer">
  ${textfooter}

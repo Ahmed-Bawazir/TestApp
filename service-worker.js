@@ -1,4 +1,4 @@
-const staticDateCache = "date-pray-v1"
+const staticDateCache = "date-pray-v1";
 const assets = [
   "/",
   "/index.html",
@@ -8,21 +8,23 @@ const assets = [
   "/icon512.png",
   "/manifest.json",
   "/date.json",
-]
+];
 
-self.addEventListener("install", installEvent => {
+self.addEventListener("install", (installEvent) => {
   installEvent.waitUntil(
-    caches.open(staticDateCache).then(cache => {
-      cache.addAll(assets)
+    caches.open(staticDateCache).then((cache) => {
+      cache.addAll(assets);
     })
-  )
-})
-if (!navigator.onLine) {
-  self.addEventListener("fetch", fetchEvent => {
-    fetchEvent.respondWith(
-      caches.match(fetchEvent.request).then(res => {
-        return res || fetch(fetchEvent.request)
-      })
-    )
-  })
-}
+  );
+});
+/* if (!navigator.onLine) { */
+
+self.addEventListener("fetch", (fetchEvent) => {
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then((res) => {
+      return res || fetch(fetchEvent.request);
+    })
+  );
+});
+
+/* } */

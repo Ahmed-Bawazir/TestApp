@@ -7,7 +7,7 @@ if ("serviceWorker" in navigator) {
   })
 }
 //
-async function updateNow() {
+/* async function updateNow() {
   // Check if online
   if (navigator.onLine) {
     //update date.json file
@@ -24,7 +24,7 @@ async function updateNow() {
   } else {
     alert("يرجى التحقق من اتصالك بالإنترنت.");
   }
-}
+} */
 //
 let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
@@ -157,7 +157,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  ||| مسجد الرحمة
+    <h2>مواقيت الصلوات  |test|| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

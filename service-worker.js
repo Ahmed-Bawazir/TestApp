@@ -48,8 +48,8 @@ var precacheConfig = [
   ["style.css", "265a2c3891fe945c12ce436f7fb85b5e"],
 ];
 var cacheName =
-  "sw-precache-v3-sw-precache-" +
-  (self.registration ? self.registration.scope : "");
+  "sw-precache-v3"
+ ;
 
 var ignoreUrlParametersMatching = [/^utm_/];
 
@@ -308,3 +308,43 @@ self.addEventListener("fetch", function (event) {
     }
   }
 });
+//
+ function updateNow(){
+  self.
+    caches.open(cacheName)
+      .then(function (cache) {
+        return setOfCachedUrls(cache).then(function (cachedUrls) {
+          return Promise.all(
+            Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
+              // If we don't have a key matching url in the cache already, add it.
+              if (cachedUrls.has(cacheKey)) {
+                var request = new Request(cacheKey, {
+                  credentials: "same-origin",
+                });
+                return fetch(request).then(function (response) {
+                  // Bail out of installation unless we get back a 200 OK for
+                  // every request.
+                  if (!response.ok) {
+                    throw new Error(
+                      "Request for " +
+                        cacheKey +
+                        " returned a " +
+                        "response with status " +
+                        response.status
+                    );
+                  }
+
+                  return cleanResponse(response).then(function (
+                    responseToCache
+                  ) {
+                    return cache.put(cacheKey, responseToCache);
+                  });
+                });
+              }
+            })
+          );
+        });
+      })
+      
+  
+};

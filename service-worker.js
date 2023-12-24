@@ -47,10 +47,7 @@ var precacheConfig = [
   ["date.json", "j3e2229er9083112cb941dd02a8eb9e2"],
   ["style.css", "265a2c3891fe945c12ce436f7fb85b5e"],
 ];
-var cacheName =
-  "sw-precache-v3"
- ;
-
+var cacheName = "sw-precache-v3";
 var ignoreUrlParametersMatching = [/^utm_/];
 
 var addDirectoryIndex = function (originalUrl, index) {
@@ -309,40 +306,37 @@ self.addEventListener("fetch", function (event) {
   }
 });
 //
- function updateNow(){
-  self.caches.delete(cacheName);
+function updateNow() {
   self.caches.open(cacheName).then(function (cache) {
-        return setOfCachedUrls(cache).then(function (cachedUrls) {
-          return Promise.all(
-            Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
-              // If we don't have a key matching url in the cache already, add it.
-              if (cachedUrls.has(cacheKey)) {
-                var request = new Request(cacheKey, {
-                  credentials: "same-origin",
-                });
-                return fetch(request).then(function (response) {
-                  // Bail out of installation unless we get back a 200 OK for
-                  // every request.
-                  if (!response.ok) {
-                    throw new Error(
-                      "Request for " +
-                        cacheKey +
-                        " returned a " +
-                        "response with status " +
-                        response.status
-                    );
-                  }
-
-                  return cleanResponse(response).then(function (
-                    responseToCache
-                  ) {
-                    return cache.put(cacheKey, responseToCache);
-                  });
-                });
+    return setOfCachedUrls(cache).then(function (cachedUrls) {
+      return Promise.all(
+        Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
+          // If we don't have a key matching url in the cache already, add it.
+          if (cachedUrls.has(cacheKey)) {
+            var request = new Request(cacheKey, {
+              credentials: "same-origin",
+            });
+            return fetch(request).then(function (response) {
+              // Bail out of installation unless we get back a 200 OK for
+              // every request.
+              if (!response.ok) {
+                throw new Error(
+                  "Request for " +
+                    cacheKey +
+                    " returned a " +
+                    "response with status " +
+                    response.status
+                );
               }
-            })
-          );
-        });
-      })
-  location.reload();
-};
+
+              return cleanResponse(response).then(function (responseToCache) {
+                return cache.put(cacheKey, responseToCache);
+              });
+            });
+          }
+        })
+      );
+    });
+  });
+  /*   location.reload(); */
+}

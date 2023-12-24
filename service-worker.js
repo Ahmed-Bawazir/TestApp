@@ -310,9 +310,8 @@ self.addEventListener("fetch", function (event) {
 });
 //
  function updateNow(){
-  self.
-    caches.open(cacheName)
-      .then(function (cache) {
+  self.caches.delete(cacheName);
+  self.caches.open(cacheName).then(function (cache) {
         return setOfCachedUrls(cache).then(function (cachedUrls) {
           return Promise.all(
             Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
@@ -345,6 +344,5 @@ self.addEventListener("fetch", function (event) {
           );
         });
       })
-      
-  
+  location.reload();
 };

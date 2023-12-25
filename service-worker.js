@@ -341,19 +341,9 @@ function updateNow() {
     }).then(()=>{
       setTimeout(() => {
         location.reload();
-        if ("Notification" in window) {
-          // طلب الإذن لإظهار الإشعار
-          Notification.requestPermission().then(function (permission) {
-            if (permission === "granted") {
-              // إرسال الإشعار
-              var notification = new Notification("عنوان الإشعار", {
-                body: "نص الإشعار هنا",
-              });
-            }
-          });
-        }
-
-      }, 2000);
+        window,close();
+        
+      }, 3000);
     });
       
   }

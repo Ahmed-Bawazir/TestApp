@@ -308,45 +308,44 @@ self.addEventListener("fetch", function (event) {
 //
 function updateNow() {
   if (navigator.onLine) {
-    self.caches
-      .open(cacheName)
-      .then(function (cache) {
-        return setOfCachedUrls(cache).then(function (cachedUrls) {
-          return Promise.all(
-            Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
-              // If we don't have a key matching url in the cache already, add it.
-              if (cachedUrls.has(cacheKey)) {
-                var request = new Request(cacheKey, {
-                  credentials: "same-origin",
+    self.caches.open(cacheName).then(function (cache) {
+      return setOfCachedUrls(cache).then(function (cachedUrls) {
+        return Promise.all(
+          Array.from(urlsToCacheKeys.values()).map(function (cacheKey) {
+            // If we don't have a key matching url in the cache already, add it.
+            if (cachedUrls.has(cacheKey)) {
+              var request = new Request(cacheKey, {
+                credentials: "same-origin",
+              });
+              return fetch(request).then(function (response) {
+                // Bail out of installation unless we get back a 200 OK for
+                // every request.
+                if (!response.ok) {
+                  throw new Error(
+                    "Request for " +
+                      cacheKey +
+                      " returned a " +
+                      "response with status " +
+                      response.status
+                  );
+                }
+  
+                return cleanResponse(response).then(function (responseToCache) {
+                  return cache.put(cacheKey, responseToCache);
                 });
-                return fetch(request).then(function (response) {
-                  // Bail out of installation unless we get back a 200 OK for
-                  // every request.
-                  if (!response.ok) {
-                    throw new Error(
-                      "Request for " +
-                        cacheKey +
-                        " returned a " +
-                        "response with status " +
-                        response.status
-                    );
-                  }
-
-                  return cleanResponse(response).then(function (
-                    responseToCache
-                  ) {
-                    return cache.put(cacheKey, responseToCache);
-                  });
-                });
-              }
-            })
-          );
-        });
-      })
-      .then(() => {
-        location.reload();
+              });
+            }
+          })
+        );
       });
-  } else {
-    alert("No Internet !! ..?");
+    }).then(()=>{
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    });
+      
+  }
+  else{
+    alert("No Internet ..!!");
   }
 }

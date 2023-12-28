@@ -1,8 +1,25 @@
-if ("serviceWorker" in navigator) {
-  // register service worker
-  navigator.serviceWorker.register("service-worker.js");
-}
+const registerServiceWorker = async () => {
+  if ("serviceWorker" in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register("/service-worker.js", {
+        scope: "/",
+      });
+      if (registration.installing) {
+        console.log("Service worker installing");
+      } else if (registration.waiting) {
+        console.log("Service worker installed");
+      } else if (registration.active) {
+        console.log("Service worker active");
+      }
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+};
 
+// …
+
+registerServiceWorker();
 //
 let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
@@ -135,7 +152,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  |ww|| مسجد الرحمة
+    <h2>مواقيت الصلوات  |ttt|| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

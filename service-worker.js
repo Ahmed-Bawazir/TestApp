@@ -1,5 +1,5 @@
 //installing and add files to cache
-let nameOfCache = "v3";
+let nameOfCache = "v4";
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(nameOfCache);
   await cache.addAll(resources);
@@ -87,7 +87,8 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
+  console.log(event.request);
+  event.respondWith(    
     cacheFirst({
       request: event.request,
       fallbackUrl: "/icon512.png",

@@ -5,9 +5,9 @@ const addResourcesToCache = async (resources) => {
   await cache.addAll(resources);
 };
 let asset = [
-  "/",
-  "/index.html",
-  "/style.css",
+  
+  "index.html",
+  "style.css",
   "/js.js",
   "/manifest.json",
   "/date.json",

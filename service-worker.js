@@ -1,5 +1,5 @@
 //installing and add files to cache
-let nameOfCache = "v2";
+let nameOfCache = "v3";
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(nameOfCache);
   await cache.addAll(resources);

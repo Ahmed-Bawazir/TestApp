@@ -17,11 +17,15 @@ let asset = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(nameOfCache).then(async function (cache) {
-      for (let ass of asset) {
-        await cache.add(new Request(ass));
-        console.log(ass);
-      }
-    })
+      for (let ass of asset)
+      {
+        try {
+          await cache.add(new Request(ass));
+        } catch (err) {
+          console.warn('sw: cache.add',err);
+        }
+      }}
+    )
   );
 });
 /* //installing and add files to cache 

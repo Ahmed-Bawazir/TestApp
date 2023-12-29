@@ -5,14 +5,14 @@ const addResourcesToCache = async (resources) => {
   await cache.addAll(resources);
 };
 let asset = [
-  
+  "/",
   "index.html",
   "style.css",
-  "/js.js",
-  "/manifest.json",
-  "/date.json",
-  "/icon192.png",
-  "/icon512.png",
+  "js.js",
+  "manifest.json",
+  "date.json",
+  "icon192.png",
+  "icon512.png",
 ];
 self.addEventListener("install", (event) => {
   event.waitUntil(

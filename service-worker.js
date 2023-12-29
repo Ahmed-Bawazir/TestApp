@@ -20,7 +20,7 @@ self.addEventListener("install", (event) => {
       for (let ass of asset)
       {
         try {
-          await cache.add(new Request(ass));
+           cache.add(new Request(ass));
         } catch (err) {
           console.warn('sw: cache.add',err);
         }

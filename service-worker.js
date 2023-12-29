@@ -1,37 +1,8 @@
-//installing and add files to cache
-let nameOfCache = "v1";
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open(nameOfCache);
-  await cache.addAll(resources);
-};
-let asset = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/js.js",
-  "/manifest.json",
-  "/date.json",
-  "/icon192.png",
-  "/icon512.png",
-];
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(nameOfCache).then(async function (cache) {
-      for (let ass of asset)
-      {
-        try {
-           cache.add(new Request(ass));
-        } catch (err) {
-          console.warn('sw: cache.add',err);
-        }
-      }}
-    )
-  );
-});
-/* //installing and add files to cache 
+//installing and add files to cache 
 let nameOfCache="v1";
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(nameOfCache);
+  console.log("open");
   await cache.addAll(resources);
 };
 
@@ -49,7 +20,7 @@ self.addEventListener("install", (event) => {
      
     ]),
   );
-}); */
+}); 
 //fetch files from cache
 const putInCache = async (request, response) => {
   const cache = await caches.open(nameOfCache);

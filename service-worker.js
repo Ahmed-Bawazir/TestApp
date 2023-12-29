@@ -3,7 +3,11 @@ let nameOfCache="v1";
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(nameOfCache);
   console.log("open");
+try {
   await cache.addAll(resources);
+} catch (error) {
+  console.log(error);
+}
 };
 
 self.addEventListener("install", (event) => {

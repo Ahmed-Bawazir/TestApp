@@ -1,17 +1,25 @@
 const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
+    alert("serviceWorker");
     try {
-      const registration = await navigator.serviceWorker.register("/service-worker.js", {
-        scope: "/",
-      });
+      const registration = await navigator.serviceWorker.register(
+        "./service-worker.js",
+        {
+          scope: "/",
+        }
+      );
+      alert("serviceWorker 2");
       if (registration.installing) {
         console.log("Service worker installing");
+        alert("install 2");
       } else if (registration.waiting) {
         console.log("Service worker installed");
       } else if (registration.active) {
         console.log("Service worker active");
       }
     } catch (error) {
+      alert("install error 2");
+
       console.error(`Registration failed with ${error}`);
     }
   }

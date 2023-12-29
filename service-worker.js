@@ -16,9 +16,10 @@ let asset = [
 ];
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(nameOfCache).then(function (cache) {
+    caches.open(nameOfCache).then(async function (cache) {
       for (let ass of asset) {
-        cache.add(new Request(ass));
+        await cache.add(new Request(ass));
+        console.log(ass);
       }
     })
   );

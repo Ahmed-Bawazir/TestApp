@@ -1,5 +1,5 @@
 //installing and add files to cache
-let nameOfCache = "v1";
+let nameOfCache = "v2";
 let assets = [
   "/",
   "index.html",

@@ -69,20 +69,20 @@ self.addEventListener("fetch", (event) => {
   );
 });
 //activate
-/* 
+
 const deleteCache = async (key) => {
   await caches.delete(key);
 };
 
 const deleteOldCaches = async () => {
-  console.log("dfdf");
-  const cacheKeepList = ["v5"];
+  
+  const cacheKeepList = [nameOfCache];
   const keyList = await caches.keys();
-  console.log(keyList);
+  //console.log(keyList);
   const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
   await Promise.all(cachesToDelete.map(deleteCache));
 };
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(deleteOldCaches());
-});  */
+}); 

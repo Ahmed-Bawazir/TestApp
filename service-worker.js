@@ -1,11 +1,7 @@
 //installing and add files to cache
-let nameOfCache = "v4";
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open(nameOfCache);
-  await cache.addAll(resources);
-};
-let asset = [
-  
+let nameOfCache = "v1";
+let assets = [
+  "/",
   "index.html",
   "style.css",
   "js.js",
@@ -16,40 +12,18 @@ let asset = [
 ];
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(nameOfCache).then( function (cache) {
-      for (let ass of asset)
-      {
+    caches.open(nameOfCache).then(function (cache) {
+      for (let asset of assets) {
         try {
-           cache.add(ass);
+          cache.add(asset);
+          //console.log(`add ${asset} to cache done`);
         } catch (err) {
-          console.warn('sw: cache.add',err);
+          console.log(`There error to add ${asset} to cache :${err}`);
         }
-      }}
-    )
+      }
+    })
   );
 });
-/* //installing and add files to cache 
-let nameOfCache="v1";
-const addResourcesToCache = async (resources) => {
-  const cache = await caches.open(nameOfCache);
-  await cache.addAll(resources);
-};
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    addResourcesToCache([
-      "/",
-      "/index.html",
-      "/style.css",
-      "/js.js",
-      "/manifest.json",
-      "/date.json",
-      "/icon192.png",
-      "/icon512.png",
-     
-    ]),
-  );
-}); */
 //fetch files from cache
 const putInCache = async (request, response) => {
   const cache = await caches.open(nameOfCache);
@@ -58,7 +32,7 @@ const putInCache = async (request, response) => {
 
 const cacheFirst = async ({ request, fallbackUrl }) => {
   // First try to get the resource from the cache
-  const responseFromCache = (await caches.open(nameOfCache)).match();
+  const responseFromCache = await caches.match(request);
   if (responseFromCache) {
     return responseFromCache;
   }
@@ -87,8 +61,7 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 self.addEventListener("fetch", (event) => {
-  console.log(event.request);
-  event.respondWith(    
+  event.respondWith(
     cacheFirst({
       request: event.request,
       fallbackUrl: "/icon512.png",

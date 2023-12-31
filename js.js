@@ -21,6 +21,9 @@ const registerServiceWorker = async () => {
 
 registerServiceWorker();
 //
+function updateNow(){
+window.close()}
+//
 let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
   api.open("GET", "date.json");

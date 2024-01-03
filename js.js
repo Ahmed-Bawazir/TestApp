@@ -33,8 +33,9 @@ let assetsList = [
 ];
 //
 async function updateNow() {
-  caches.delete("v26").then(
-    caches.open("v26").then(function (cache) {
+ if(navigator.onLine){
+  caches.delete("v1").then(
+    caches.open("v1").then(function (cache) {
       for (let asset of assetsList) {
         try {
           cache.add(asset);
@@ -45,6 +46,10 @@ async function updateNow() {
       }
     }).then(location.reload())
   )
+ }
+ else{
+  alert("يرجى التحقق من أتصالك بالأنترنت ..")
+ }
 }
 //
 let pro = new Promise((resolve, reject) => {

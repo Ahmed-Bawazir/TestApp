@@ -59,35 +59,58 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
     });
   }
 };
-/*
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
-    cacheFirst({
+    networkFirst({
       request: event.request,
       fallbackUrl: "/icon512.png",
     })
   );
-});*/
+});
 //network first
-self.addEventListener('fetch', event => {
+/* self.addEventListener('fetch', event => {
  event.respondWith(
    fetch(event.request).then(response => {
      cache.put(event.request, response.clone());
      return response;
    }).catch(_ => {
      return caches.match(event.request);
-   });
- );
-});
+   }))
+  
+}); */
+//test
+const networkFirst = async ({ request, fallbackUrl }) => {
+  // First try to get the resource from the
+  try {
+    const responseFromNetwork = await fetch(request);
+    putInCache(request, responseFromNetwork.clone());
+    console.log("network");
+    return responseFromNetwork;
+  } catch (error) {
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+      console.log("cache");
+      return responseFromCache;
+    } else {
+      const fallbackResponse = await caches.match(fallbackUrl);
+      return fallbackResponse;
+    }
+  }
+  //
+
+  // Next try to get the resource from the network
+};
+//end test
 //
 
-self.addEventListener(’fetch’, function (event) {
+/* self.addEventListener(’fetch’, function (event) {
     event.respondWith(
         fetch(event.request).catch(function() {
             return caches.match(event.request)
         })
     )
-})
+}) */
 
 //activate
 
@@ -96,7 +119,7 @@ const deleteCache = async (key) => {
 };
 
 const deleteOldCaches = async () => {
-    console.log("activate");
+  console.log("activate");
 
   const cacheKeepList = [nameOfCache];
   const keyList = await caches.keys();
@@ -107,7 +130,7 @@ const deleteOldCaches = async () => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(deleteOldCaches());
-}); 
+});
 //
 /* function updateTest(){
   caches.open(nameOfCache).then(function (cache) {

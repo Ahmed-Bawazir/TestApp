@@ -34,18 +34,8 @@ let assetsList = [
 //
 async function updateNow() {
  if(navigator.onLine){
-  caches.delete("v1").then(
-    caches.open("v1").then(function (cache) {
-      for (let asset of assetsList) {
-        try {
-          cache.add(asset);
-          console.log(`add ${asset} to cache done`);
-        } catch (err) {
-          console.log(`There error to add ${asset} to cache :${err}`);
-        }
-      }
-    }).then(location.reload())
-  )
+  caches.delete("v1").then(location.reload())
+  
  }
  else{
   alert("يرجى التحقق من أتصالك بالأنترنت ..")

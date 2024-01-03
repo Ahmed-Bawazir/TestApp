@@ -173,7 +173,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  ||Test"Good4"| مسجد الرحمة
+    <h2>مواقيت الصلوات  ||Test"Good5"| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

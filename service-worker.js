@@ -1,5 +1,5 @@
 //installing and add files to cache
-let nameOfCache = "v6";
+let nameOfCache = "v1";
 let assets = [
   "/",
   "index.html",
@@ -75,7 +75,8 @@ const deleteCache = async (key) => {
 };
 
 const deleteOldCaches = async () => {
-  
+    console.log("activate");
+
   const cacheKeepList = [nameOfCache];
   const keyList = await caches.keys();
   //console.log(keyList);
@@ -86,3 +87,16 @@ const deleteOldCaches = async () => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(deleteOldCaches());
 }); 
+//
+/* function updateTest(){
+  caches.open(nameOfCache).then(function (cache) {
+    for (let asset of assets) {
+      try {
+        cache.add(asset);
+        //console.log(`add ${asset} to cache done`);
+      } catch (err) {
+        console.log(`There error to add ${asset} to cache :${err}`);
+      }
+    }
+  })
+} */

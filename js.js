@@ -1,8 +1,9 @@
 const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
-   
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js");  
+      const registration = await navigator.serviceWorker.register(
+        "service-worker.js"
+      );
       if (registration.installing) {
         console.log("Service worker installing");
       } else if (registration.waiting) {
@@ -11,7 +12,6 @@ const registerServiceWorker = async () => {
         console.log("Service worker active");
       }
     } catch (error) {
-
       console.error(`Registration failed with ${error}`);
     }
   }
@@ -21,8 +21,31 @@ const registerServiceWorker = async () => {
 
 registerServiceWorker();
 //
-function updateNow(){
-window.close()}
+let assetsList = [
+  "/",
+  "index.html",
+  "style.css",
+  "js.js",
+  "manifest.json",
+  "date.json",
+  "icon192.png",
+  "icon512.png",
+];
+//
+async function updateNow() {
+  caches.delete("v26").then(
+    caches.open("v26").then(function (cache) {
+      for (let asset of assetsList) {
+        try {
+          cache.add(asset);
+          console.log(`add ${asset} to cache done`);
+        } catch (err) {
+          console.log(`There error to add ${asset} to cache :${err}`);
+        }
+      }
+    }).then(location.reload())
+  )
+}
 //
 let pro = new Promise((resolve, reject) => {
   let api = new XMLHttpRequest();
@@ -155,7 +178,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  |ttt|| مسجد الرحمة
+    <h2>مواقيت الصلوات  ||Test"Good"| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

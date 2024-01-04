@@ -31,6 +31,7 @@ const putInCache = async (request, response) => {
 };
 
 const cacheFirst = async ({ request, fallbackUrl }) => {
+  console.log("cacheFirst");
   // First try to get the resource from the cache
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
@@ -61,12 +62,21 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 self.addEventListener("fetch", (event) => {
+ if (navigator.onLine) {
   event.respondWith(
-    networkFirst({
+    networkFirst2({
       request: event.request,
       fallbackUrl: "/icon512.png",
     })
   );
+ }else{
+  event.respondWith(
+    cacheFirst({
+      request: event.request,
+      fallbackUrl: "/icon512.png",
+    })
+  );
+ }
 });
 //network first
 /* self.addEventListener('fetch', event => {
@@ -80,7 +90,7 @@ self.addEventListener("fetch", (event) => {
   
 }); */
 //test
-const networkFirst = async ({ request, fallbackUrl }) => {
+/* const networkFirst = async ({ request, fallbackUrl }) => {
   // First try to get the resource from the
   try {
     const responseFromNetwork = await fetch(request);
@@ -100,8 +110,34 @@ const networkFirst = async ({ request, fallbackUrl }) => {
   //
 
   // Next try to get the resource from the network
-};
+}; */
 //end test
+//
+const networkFirst2 = async ({ request, fallbackUrl }) => {
+  // First try to get the resource from the
+  console.log("networkFirst");
+  try {
+    const responseFromNetwork = await fetch(request);
+    if (responseFromNetwork.ok) {
+      putInCache(request, responseFromNetwork.clone());
+      console.log("network");
+      return responseFromNetwork;
+    }
+  } catch (error) {
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+      console.log("cache");
+      return responseFromCache;
+    } else {
+      const fallbackResponse = await caches.match(fallbackUrl);
+      return fallbackResponse;
+    }
+  }
+  //
+
+  // Next try to get the resource from the network
+};
+
 //
 
 /* self.addEventListener(’fetch’, function (event) {
@@ -112,7 +148,7 @@ const networkFirst = async ({ request, fallbackUrl }) => {
     )
 }) */
 
-//activate
+////////////////////////////////////////activate
 
 const deleteCache = async (key) => {
   await caches.delete(key);

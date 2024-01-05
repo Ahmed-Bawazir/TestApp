@@ -27,12 +27,14 @@ async function updateNow() {
   const deel = (await caches.open("v1")).delete("/TestApp/date.json");
   console.log(deel);
   const aadd = (await caches.open("v1")).add("/TestApp/date.json");
+  const aadd1 = (await caches.open("v1")).add("./date1.json");
   console.log(aadd);
+  console.log(aadd1);
   //console.log(keyList);
   /* const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
   await Promise.all(cachesToDelete.map(deleteCache)); */
 
-  location.reload()
+  //location.reload()
   
  }
  else{

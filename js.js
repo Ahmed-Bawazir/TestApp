@@ -21,20 +21,10 @@ const registerServiceWorker = async () => {
 
 registerServiceWorker();
 //
-let assetsList = [
-  "/",
-  "index.html",
-  "style.css",
-  "js.js",
-  "manifest.json",
-  "date.json",
-  "icon192.png",
-  "icon512.png",
-];
-//
+
 async function updateNow() {
  if(navigator.onLine){
-  caches.delete("v1").then(location.reload())
+  location.reload()
   
  }
  else{
@@ -173,7 +163,7 @@ pro.then((e) => {
   content.className = "container";
   content.innerHTML = `
   <div class="container">
-    <h2>مواقيت الصلوات  ||Test"Good881"| مسجد الرحمة
+    <h2>مواقيت الصلوات  ||Test"777"| مسجد الرحمة
       <br/>
       <span>بمنطقة النقعة</span></h2>
    

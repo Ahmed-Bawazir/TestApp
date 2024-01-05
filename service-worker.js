@@ -62,6 +62,14 @@ const cacheFirst = async ({ request, fallbackUrl }) => {
 };
 
 self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    cacheFirst({
+      request: event.request,
+      fallbackUrl: "/icon512.png",
+    })
+  );
+});
+/* self.addEventListener("fetch", (event) => {
  if (navigator.onLine) {
   event.respondWith(
     networkFirst2({
@@ -77,7 +85,7 @@ self.addEventListener("fetch", (event) => {
     })
   );
  }
-});
+}); */
 //network first
 /* self.addEventListener('fetch', event => {
  event.respondWith(

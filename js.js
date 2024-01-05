@@ -24,6 +24,13 @@ registerServiceWorker();
 
 async function updateNow() {
  if(navigator.onLine){
+  const keyList = (await caches.open("v1")).delete("/date.json");
+  console.log("delete");
+  const keyList2 = (await caches.open("v1")).add("/date.json");
+  //console.log(keyList);
+  /* const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
+  await Promise.all(cachesToDelete.map(deleteCache)); */
+
   location.reload()
   
  }

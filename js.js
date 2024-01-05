@@ -26,14 +26,14 @@ async function updateNow() {
  if(navigator.onLine){
   const deel = (await caches.open("v1")).delete("./date.json").then(e=>alert(`delet ${e}`));
   
-  const aadd = (await caches.open("v1")).add("./date.json").then(e=>alert(`add ${e}`));
+  //const aadd = (await caches.open("v1")).add("./date.json").then(e=>alert(`add ${e}`));
  
   
   //console.log(keyList);
   /* const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
   await Promise.all(cachesToDelete.map(deleteCache)); */
 
-  //location.reload()
+  location.reload()
   
  }
  else{

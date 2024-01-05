@@ -24,9 +24,10 @@ registerServiceWorker();
 
 async function updateNow() {
  if(navigator.onLine){
-  const keyList = (await caches.open("v1")).delete("/date.json");
-  console.log("delete");
-  const keyList2 = (await caches.open("v1")).add("/date.json");
+  const deel = (await caches.open("v1")).delete("/TestApp/date.json");
+  console.log(deel);
+  const aadd = (await caches.open("v1")).add("/TestApp/date.json");
+  console.log(aadd);
   //console.log(keyList);
   /* const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
   await Promise.all(cachesToDelete.map(deleteCache)); */

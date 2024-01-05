@@ -24,10 +24,10 @@ registerServiceWorker();
 
 async function updateNow() {
  if(navigator.onLine){
-  const deel = (await caches.open("v1")).delete("/TestApp/date.json").then(e=>alert(`delet ${e}`));
+  const deel = (await caches.open("v1")).delete("./date.json").then(e=>alert(`delet ${e}`));
   
-  const aadd = (await caches.open("v1")).add("/TestApp/date.json").then(e=>alert(`add ${e}`));
-  const aadd1 = (await caches.open("v1")).add("./date1.json").then(e=>alert(`add2 ${e}`));
+  const aadd = (await caches.open("v1")).add("./date.json").then(e=>alert(`add ${e}`));
+ 
   
   //console.log(keyList);
   /* const cachesToDelete = keyList.filter((key) => !cacheKeepList.includes(key));
